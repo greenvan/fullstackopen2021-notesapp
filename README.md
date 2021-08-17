@@ -1,4 +1,24 @@
-# Part 3 MongoDB
+1. Create repo with created app in parts 1-4
+   ``` bash 
+   $ git init
+   $ git add .
+   $ git commit -m 'Initial commit - Part4'
+   $ git branch -M main
+   $ git remote add origin https://github.com/greenvan/fullstackopen2021-notesapp.git
+   $ git push -u origin main
+   ```
+2. Create heroku app
+   ``` bash
+   $ heroku create gv-fso21-notes
+   $ heroku git:remote -a gv-fso21-notes
+   $ heroku config:set MONGODB_URI='mongodb+srv://fullstack:{passwd}@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
+   $ git push heroku main
+   ```
+
+# Previous tasks performed:
+
+
+## Part 3 MongoDB
 1. Create: Organization, Project and Cluster (AWS, Frankfurt)
 2. Database Access --> Create database user, read and Write
 3. Network Access --> Allow from anywhere
@@ -47,19 +67,19 @@ note.save().then(result => {
 ```
 
 
-# In the backend
+### In the backend
 1. New module `models/note.js`
 2. In index.js: `const Note = require('./models/note')`
 3. Define environment variables
     3.1 Install dotenv library: `npm install dotenv`
     3.2 Create .env file
 
-# Validation
+### Validation
 1. Define validation rules on mongoose schema
 2. Pass exceptions to middleware (next) in post api/notes
 3. Manage on errorHandler
 
-# To production
+### To production
 1. Promise chaining
 2. Heroku
     2.1 Environment variables: 
@@ -73,9 +93,9 @@ or
 $ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 ```
 
-# Part 4 (Notes app)
+## Part 4 (Notes app)
 
-## Structure and Test with jest
+### Structure and Test with jest
 
 1. Install jest 
 ```bash
@@ -103,8 +123,8 @@ npm install --save-dev jest
 3. Add `"jest": true` a la propiedad env en el archivo .eslintrc.js.
 
 
-## Testing the backend
-### Test environment
+### Testing the backend
+#### Test environment
 1. Edit scripts in package.json NODE_ENV and runInBand
 ```json
 {
@@ -145,7 +165,7 @@ const MONGODB_URI = process.env.NODE_ENV === 'test'
 
 5. Add separate variables for the database addresses of the development and test databases in `.env` file
 
-### Supertest
+#### Supertest
 1. Install
 `npm install --save-dev supertest`
 
@@ -170,7 +190,7 @@ module.exports = {
 }
 ```
 
-### Initializing the database before tests
+#### Initializing the database before tests
 
 1. Initialize the database before every test with the beforeEach function
 ```js
@@ -196,12 +216,12 @@ beforeEach(async () => {
 })
 ```
 
-### Running tests one by one
+#### Running tests one by one
 1. Test in a file: `npm test -- tests/note_api.test.js`
 2. Tests with a specific name `npm test -- -t 'a specific note is within the returned notes'`
 3. Test that contain 'notes' in their name: `npm test -- -t 'notes'`
 
-### More tests and refactoring the backend
+#### More tests and refactoring the backend
 
 1. Write a test for each route of the API
 2. Refactor the remaining operations
@@ -222,7 +242,7 @@ const sinon = require('sinon');
 sinon.stub(time, 'setTimeout');
 ```
 
-### Eliminating the try-catch
+#### Eliminating the try-catch
 All of the route handlers follow the same structure
 ```js
 try {
@@ -238,7 +258,7 @@ try {
 
 Because of the library, we do not need the next(exception) call anymore. The library handles everything under the hood. If an exception occurs in a async route, the execution is automatically passed to the error handling middleware.
 
-### Optimizing the beforeEach function
+#### Optimizing the beforeEach function
 ```js
  helper.initialNotes.forEach(async (note) => {
     let noteObject = new Note(note)
@@ -268,7 +288,7 @@ Aún se puede acceder a los valores devueltos de cada promesa en la matriz cuand
 
 Promise.all ejecuta las promesas que recibe en paralelo. Si las promesas deben ejecutarse en un orden particular, esto será problemático. En situaciones como esta, las operaciones se pueden ejecutar dentro de un for ... of, que garantiza una determinada orden de ejecución.
 
-## USer Administration
+### USer Administration
 
 1. Create user.js in models 
 2. Add User to Note model

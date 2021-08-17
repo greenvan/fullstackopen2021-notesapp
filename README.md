@@ -1,3 +1,26 @@
+# Notes app FSO 2021
+**Full Stack Course at th University of Helsinky (2021)**
+
+  * [Deploy the app to heroku](#deploy-the-app-to-heroku)
+- [Previously performed tasks:](#previously-performed-tasks-)
+  * [Part 3 MongoDB](#part-3-mongodb)
+    + [In the backend](#in-the-backend)
+    + [Validation](#validation)
+    + [To production](#to-production)
+  * [Part 4 (Notes app)](#part-4--notes-app-)
+    + [Structure and Test with jest](#structure-and-test-with-jest)
+    + [Testing the backend](#testing-the-backend)
+      - [Test environment](#test-environment)
+      - [Supertest](#supertest)
+      - [Initializing the database before tests](#initializing-the-database-before-tests)
+      - [Running tests one by one](#running-tests-one-by-one)
+      - [More tests and refactoring the backend](#more-tests-and-refactoring-the-backend)
+      - [Eliminating the try-catch](#eliminating-the-try-catch)
+      - [Optimizing the beforeEach function](#optimizing-the-beforeeach-function)
+    + [USer Administration](#user-administration)
+
+## Deploy the app to heroku
+
 1. Create repo with created app in parts 1-4
    ``` bash 
    $ git init
@@ -7,7 +30,9 @@
    $ git remote add origin https://github.com/greenvan/fullstackopen2021-notesapp.git
    $ git push -u origin main
    ```
-2. Create heroku app
+2. Move 'cross-env' to dependencies instead of devDependencies in `package.json` in order to work with heroku which only installs production deps.
+
+3. Create heroku app
    ``` bash
    $ heroku create gv-fso21-notes
    $ heroku git:remote -a gv-fso21-notes
@@ -15,7 +40,7 @@
    $ git push heroku main
    ```
 
-# Previous tasks performed:
+# Previously performed tasks:
 
 
 ## Part 3 MongoDB
